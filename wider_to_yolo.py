@@ -7,9 +7,15 @@ from PIL import Image
 # images_base_dir = r"C:\YoLo-Face\dataset_raw\WIDER_train\images"
 # target_dir = r"C:\YoLo-Face\dataset\labels\train"
 
-source_label_file = r"path\to\wider_face_train_bbx_gt.txt"
-images_base_dir = r"path\to\WIDER_train\images"
-target_dir = r"path\to\dataset\labels\train"
+# source_label_file = r"C:\YoLo-Face\dataset_raw\wider_face_split\wider_face_train_bbx_gt.txt"
+# images_base_dir = r"C:\YoLo-Face\dataset_raw\WIDER_train\images"
+# target_dir = r"C:\YoLo-Face\dataset\labels\train"
+
+source_label_file = r"C:\YoLo-Face\dataset_raw\wider_face_split\wider_face_val_bbx_gt.txt"
+images_base_dir = r"C:\YoLo-Face\dataset_raw\WIDER_val\images"
+target_dir = r"C:\YoLo-Face\dataset\labels\val"
+
+
 # ==============================================
 
 # Create target directory if not exists

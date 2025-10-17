@@ -1,0 +1,7 @@
+# YOLOv8 dataset configuration for WIDER FACE
+
+train: dataset/images/train
+val: dataset/images/val
+
+nc: 1
+names: ['face']
