@@ -1,19 +1,28 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
-contract Counter {
-  uint public x;
+contract ZKBioRegistry {
 
-  event Increment(uint by);
+  event Commitment(uint256 indexed id,uint256 indexed p_hash);
+  error InvalidCommiter();
 
-  function inc() public {
-    x++;
-    emit Increment(1);
+  mapping(uint256=>uint256) private commitments;
+
+  address public commiter;
+
+  modifier hasRole {
+    if(msg.sender!=commiter) revert InvalidCommiter();
+    _;    
   }
 
-  function incBy(uint by) public {
-    require(by > 0, "incBy: increment should be positive");
-    x += by;
-    emit Increment(by);
+  function commit(uint256 id, uint256 p_hash) external hasRole{
+    emit Commitment(id,p_hash);
+    commitments[id] = p_hash;
   }
+
+  function reterieve(uint256 id) external view returns(uint256){
+    return commitments[id];
+  }
+
+
 }
