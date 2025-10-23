@@ -1,5 +1,7 @@
-\yoloface
-\dataset
-\dataset_raw
-face_db.index
-face_labels.pkl
+\serverenv
+\data.yaml
+\detect.py
+\FaceDetectEmbedding.py
+\FaceDetectEmbedding3.py
+\FaceDetectTest.py
+\runs
