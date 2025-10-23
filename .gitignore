@@ -1,3 +1,5 @@
 \yoloface
 \dataset
 \dataset_raw
+face_db.index
+face_labels.pkl
