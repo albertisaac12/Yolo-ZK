@@ -4,4 +4,9 @@
 \FaceDetectEmbedding.py
 \FaceDetectEmbedding3.py
 \FaceDetectTest.py
+\FaceEmbeddingDetect2.py
 \runs
+\detect.py
+\wider_to_yolo.py
+yolo11n.pt
+yolov8s.pt
