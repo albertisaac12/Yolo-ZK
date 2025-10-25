@@ -8,26 +8,14 @@ runs/
 wider_to_yolo.py
 yolo*.pt
 ReadMe.md
-
-# Node modules
 Contract/node_modules
-
-# Compilation output
 Contract/dist
-
-# pnpm deploy output
 Contract/bundle
-
-# Hardhat Build Artifacts
 Contract/artifacts
-
-# Hardhat compilation (v2) support directory
 Contract/cache
-
-# Typechain output
 Contract/types
 Contract/README.md
-# Hardhat coverage reports
 Contract/coverage
 zk-bio-server/target
 embedding_proof/target
+embedding_proof/poseidon2Generator/node_modules

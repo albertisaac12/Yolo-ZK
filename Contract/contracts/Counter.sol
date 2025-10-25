@@ -29,4 +29,9 @@ contract ZKBioRegistry is StateVars{
     return commitments[id];
   }
 
+  function updateCommitter(address newCommitter) external hasRole {
+    commiter = newCommitter;
+  }
+
+
 }
