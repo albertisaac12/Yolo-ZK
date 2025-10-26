@@ -3,3 +3,6 @@
 \dataset_raw
 face_db.index
 face_labels.pkl
+FaceDetectEmbedding.py
+FaceDetectTest.py
+FaceEmbeddingDetect2.py

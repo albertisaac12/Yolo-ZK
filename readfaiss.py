@@ -29,7 +29,7 @@ def main():
 
     # Sanity check
     if ntotal != len(labels):
-        print("[⚠] Warning: number of embeddings and labels mismatch!")
+        print("Warning: number of embeddings and labels mismatch!")
 
     # Extract embeddings
     print("\n[+] Reading all vectors...")
@@ -46,7 +46,7 @@ def main():
         # Uncomment below line to print the full 512-dim vector
         # print(vectors[i])
 
-    print("\n[✓] Done.")
+    print("\n Done.")
 
 if __name__ == "__main__":
     main()
