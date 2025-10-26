@@ -1,13 +1,15 @@
-import { Barretenberg, Fr } from "@aztec/bb.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const bb_js_1 = require("@aztec/bb.js");
 async function main() {
     // Initialize Barretenberg WASM backend
-    const api = await Barretenberg.new({ threads: 4 });
+    const api = await bb_js_1.Barretenberg.new({ threads: 4 });
     // Example embedding (replace with real 512D embedding)
     // From a API Call i need to get this 512D vector embedding then i need to calculate the has
     // Commit the hash onto the local chain
     const embedding = Array.from({ length: 512 }, (_, i) => BigInt(i + 1));
     // Convert bigint[] → Fr[]
-    const fieldElements = embedding.map((x) => new Fr(x));
+    const fieldElements = embedding.map((x) => new bb_js_1.Fr(x));
     // Poseidon2 hash
     const hash = await api.poseidon2Hash(fieldElements);
     console.log("===============================================");

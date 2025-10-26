@@ -6,8 +6,8 @@ async function main() {
 
   // Example embedding (replace with real 512D embedding)
   // From a API Call i need to get this 512D vector embedding then i need to calculate the has
-  // Commit the hash onto the local chain
-  const embedding: bigint[] = Array.from({ length: 512 }, (_, i) => BigInt(i + 1));
+  // Commit the hash onto the local chain for now
+  const embedding: bigint[] = Array.from({ length: 4 }, (_, i) => BigInt(i + 1)); // replce length with 512 (npx ts-node ./main.ts)
 
   // Convert bigint[] → Fr[]
   const fieldElements: Fr[] = embedding.map((x) => new Fr(x));
@@ -24,3 +24,4 @@ async function main() {
 main().catch(console.error);
 // 0x130bf204a32cac1f0ace56c78b731aa3809f06df2731ebcf6b3464a15788b1b9
 // 0x130bf204a32cac1f0ace56c78b731aa3809f06df2731ebcf6b3464a15788b1b9
+

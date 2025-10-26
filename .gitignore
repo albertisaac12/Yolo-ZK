@@ -7,7 +7,6 @@ FaceEmbeddingDetect2.py
 runs/
 wider_to_yolo.py
 yolo*.pt
-ReadMe.md
 Contract/node_modules
 Contract/dist
 Contract/bundle
@@ -21,4 +20,4 @@ Contract/target
 poseidon2Generator/node_modules
 Contract/ignition/deployments
 embedding_proof/Test/node_modules
-embedding-to-js/node_modules
+embedding-to-ts/node_modules
