@@ -13,6 +13,7 @@
     "@aztec/bb.js": "^2.0.3"
   },
   "devDependencies": {
+    "@noir-lang/noir_js": "^1.0.0-beta.14",
     "@types/node": "^24.9.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"

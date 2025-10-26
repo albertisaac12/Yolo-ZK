@@ -18,5 +18,7 @@ Contract/README.md
 Contract/coverage
 zk-bio-server/target
 Contract/target
-Contract/poseidon2Generator/node_modules
+poseidon2Generator/node_modules
 Contract/ignition/deployments
+embedding_proof/Test/node_modules
+embedding-to-js/node_modules
