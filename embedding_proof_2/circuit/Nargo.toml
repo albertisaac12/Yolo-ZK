@@ -1,6 +1,6 @@
 [package]
-name = "embedding_proof"
-type = "lib"
+name = "embedding_proof_2"
+type = "bin"
 authors = [""]
 # Best practice: Specify the compiler version you are using
 compiler_version = ">=0.27.0"

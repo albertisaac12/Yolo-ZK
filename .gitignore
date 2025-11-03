@@ -19,5 +19,4 @@ zk-bio-server/target
 Contract/target
 poseidon2Generator/node_modules
 Contract/ignition/deployments
-embedding_proof/Test/node_modules
-embedding-to-ts/node_modules
+embedding_proof_2/node_modules
