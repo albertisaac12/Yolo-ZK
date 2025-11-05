@@ -38,15 +38,17 @@ def main():
     else:
         vectors = np.array([index.reconstruct(i) for i in range(ntotal)])
 
+
     # Print embeddings
     print("\n=== Stored Faces ===")
     for i, label in enumerate(labels):
         print(f"\n[{i}] Label: {label}")
-        print(f"Embedding (first 10 dims): {vectors[i][:]}")
-        # Uncomment below line to print the full 512-dim vector
-        # print(vectors[i])
+        # print(f"Embedding (first 10 dims): [{', '.join(f'{x:.6f}' for x in vectors[i])}]")
+        # Uncomment below line to print the full 512-dim vector in clean format
+        print(f"Full Embedding: [{', '.join(map(str, vectors[i].tolist()))}]")
 
-    print("\n Done.")
+print("\n Done.")
+
 
 if __name__ == "__main__":
     main()

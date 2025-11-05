@@ -103,9 +103,8 @@ while True:
 
     # ===== Register new face (auto label) =====
     # ===== Register new face (auto label) =====
+        # ===== Register new face (auto label) =====
     if key == ord('r'):
-        # 'r' registers the currently-detected face into the FAISS DB. We
-        # auto-generate a label to keep this example simple.
         if current_crop is None:
             print("[!] No face detected to register.")
             continue
@@ -116,10 +115,10 @@ while True:
         print(f"[+] Capturing embedding for {name}...")
 
         try:
-            # DeepFace expects RGB images, while OpenCV uses BGR.
+            # Convert to RGB
             rgb = cv2.cvtColor(current_crop, cv2.COLOR_BGR2RGB)
-            # Get a numeric face embedding using DeepFace. We skip the internal
-            # detector since the crop already contains the face.
+
+            # Get embedding
             emb = DeepFace.represent(
                 rgb,
                 model_name=EMBED_MODEL,
@@ -127,34 +126,51 @@ while True:
                 enforce_detection=False
             )[0]["embedding"]
 
-            # Convert to float32 numpy array and normalize to unit length. Many
-            # similarity metrics assume L2-normalized vectors.
+            # Convert to numpy + normalize
             emb_np = np.array(emb, dtype="float32").reshape(1, -1)
-            emb_np = emb_np / np.linalg.norm(emb_np)  # normalize embedding
+            emb_np = emb_np / np.linalg.norm(emb_np)
 
-            # If the FAISS index doesn't exist yet, create a flat L2 index with
-            # the appropriate dimensionality (determined from the embedding).
             emb_dim = emb_np.shape[1]
             if index is None:
                 print(f"[+] Creating FAISS index with dimension {emb_dim}")
                 index = faiss.IndexFlatL2(emb_dim)
 
-            # Sanity check: ensure embedding dimension matches the index
-            # dimension. If it doesn't match, skip this registration.
             if index.d != emb_dim:
                 print("[ERROR] Embedding dimension mismatch. Skipping registration.")
                 continue
 
-            # Add the embedding and label, then persist both to disk.
+            # Save locally
             index.add(emb_np)
             labels.append(name)
             faiss.write_index(index, DB_PATH)
             with open(LABELS_PATH, "wb") as f:
                 pickle.dump(labels, f)
-            print(f"[✓] {name} added to database.")
+            print(f"[✓] {name} added to FAISS DB.")
+
+            # ✅ Send to server after saving
+            try:
+                payload = {
+                    "face_index": name,               # string label
+                    "embedding": emb                  # <-- raw float list
+                }
+
+                resp = requests.post(
+                    f"{SERVER_URL}/face-data",
+                    json=payload,
+                    timeout=10
+                )
+
+                if resp.status_code == 200:
+                    print(f"[✅] Server commit OK for {name}")
+                    print(resp.json())
+                else:
+                    print(f"[❌] Server error {resp.status_code}: {resp.text}")
+
+            except Exception as e:
+                print("[❌] Failed sending to server:", e)
+
         except Exception as e:
             print("[ERROR] Registration failed:", e)
-
     # ===== Search for existing face =====
     # ===== Search for existing face =====
     elif key == ord('s'):
