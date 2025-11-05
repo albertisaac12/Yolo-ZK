@@ -1,6 +1,6 @@
-# Makefile for ZKBioRegistry Hardhat Project in YoLo-Face/Yolo-ZK/Contract
+# Makefile for ZKBioRegistry Hardhat Project in YoLo-Face/Yolo-ZK/smartContracts
 
-CONTRACT_DIR=Contract
+CONTRACT_DIR=smartContracts
 
 # Default target
 all: help
@@ -35,5 +35,3 @@ help:
 	@echo "  make clean    - Removes the saved contract address"
 .PHONY: all node deploy commit clean help
 .DEFAULT_GOAL := all
-
-5209

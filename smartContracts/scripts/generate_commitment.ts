@@ -1,5 +1,4 @@
 import { network } from "hardhat";
-import hre from "hardhat";
 import fs from "fs";
 
 const { ethers } = await network.connect();

@@ -1,7 +1,7 @@
 
 use dep::poseidon::poseidon2::Poseidon2;
 
-global N: u32 = 4; // Set it to 4 So that I can expriment with it revert back to 512
+global N: u32 = 512; // Set it to 4 So that I can expriment with it revert back to 512
 
 fn main(embedding: [Field; N], enrolled: [Field; N], commitment_hash: pub Field) {
     let threshold: Field = 10_000_000;
