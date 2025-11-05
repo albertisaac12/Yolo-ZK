@@ -2,7 +2,9 @@ import express from "express";
 import { Barretenberg, Fr, UltraHonkBackend } from "@aztec/bb.js";
 import { Noir } from "@noir-lang/noir_js";
 import { network } from "hardhat";
+// import {ethers} from "ethers";
 import fs from "fs";
+// import artifacts from "./../../artifacts/contracts/Commitment.sol/ZKBioRegistry.json";
 // ---- Express Config ----
 const app = express();
 app.use(express.json({ limit: "10mb" }));
@@ -18,7 +20,7 @@ let api;
     console.log("[+] Poseidon Ready ✅");
 })();
 // ---- Hardhat Connect ----
-const { ethers } = await network.connect();
+const { ethers } = await network.connect("localhost");
 const [sender] = await ethers.getSigners();
 const address = fs.readFileSync("zkbio-address.txt", "utf8").trim();
 const Contract = await ethers.getContractFactory("ZKBioRegistry");
@@ -58,14 +60,14 @@ app.post("/face-data", async (req, res) => {
         console.log("Poseidon2 Hash (Fr format):");
         console.log(hash.toString());
         console.log("===============================================");
-        const id = BigInt(face_index ?? 0n);
+        // const id = BigInt(face_index ?? 0n);
         // Commit to chain
-        const tx = await contract.connect(sender).commit(id, hash);
+        const tx = await contract.connect(sender).commit(face_index, hash);
         await tx.wait();
-        console.log(`[✓] Commit successful for ID=${id}, hash=${hash}`);
+        console.log(`[✓] Commit successful for ID=${face_index}, hash=${hash}`);
         return res.status(200).json({
             status: "committed",
-            id: id.toString(),
+            id: face_index,
             hash: hash.toString(),
             txHash: tx.hash,
         });
@@ -81,12 +83,14 @@ app.post("/face-data", async (req, res) => {
 app.post("/face-verify", async (req, res) => {
     try {
         const { face_index, embedding, enrolled } = req.body;
+        console.log("embedding element type:", typeof embedding[0]);
+        // console.log(enrolled)
         if (!embedding || !enrolled)
-            return res.status(400).json({ error: "embedding or enrolled missing" });
-        const id = BigInt(face_index ?? 0n);
-        console.log(`[+] Verifying for ID=${id}`);
+            return res.status(400).json({ error: "embedding or enrolled missing" });    
+        // const id = BigInt(face_index ?? 0n);
+        console.log(`[+] Verifying for ID=${face_index}`);
         // Fetch on-chain commitment
-        const commitment_hash = await contract.reterieve(id);
+        const commitment_hash = await contract.connect(sender)["reterieve(string)"](face_index);
         console.log(`[+] On-chain commitment hash: ${commitment_hash.toString()}`);
         // Float → scaled field strings for Noir input
         const embeddingStr = embedding.map((x) => Math.floor((x + SHIFT) * SCALE).toString());
@@ -110,7 +114,7 @@ app.post("/face-verify", async (req, res) => {
         if (isValid) {
             return res.status(200).json({
                 status: "verified",
-                id: id.toString(),
+                id: face_index,
                 commitment_hash: commitment_hash.toString(),
             });
         }

@@ -17,9 +17,9 @@ import type { TypedContractEvent, TypedDeferredTopicFilter, TypedEventLog, Typed
 
   
     export namespace CommitmentEvent {
-      export type InputTuple = [id: BigNumberish, p_hash: BigNumberish];
-      export type OutputTuple = [id: bigint, p_hash: bigint];
-      export interface OutputObject {id: bigint, p_hash: bigint };
+      export type InputTuple = [id: string, p_hash: BigNumberish];
+      export type OutputTuple = [id: string, p_hash: bigint];
+      export interface OutputObject {id: string, p_hash: bigint };
       export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>
       export type Filter = TypedDeferredTopicFilter<Event>
       export type Log = TypedEventLog<Event>
@@ -82,7 +82,7 @@ import type { TypedContractEvent, TypedDeferredTopicFilter, TypedEventLog, Typed
 
     filters: {
       
-      'Commitment(uint256,uint256)': TypedContractEvent<CommitmentEvent.InputTuple, CommitmentEvent.OutputTuple, CommitmentEvent.OutputObject>;
+      'Commitment(string,uint256)': TypedContractEvent<CommitmentEvent.InputTuple, CommitmentEvent.OutputTuple, CommitmentEvent.OutputObject>;
       Commitment: TypedContractEvent<CommitmentEvent.InputTuple, CommitmentEvent.OutputTuple, CommitmentEvent.OutputObject>;
     
     };

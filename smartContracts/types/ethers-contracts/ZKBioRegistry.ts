@@ -10,9 +10,9 @@ import type { TypedContractEvent, TypedDeferredTopicFilter, TypedEventLog, Typed
 
     getEvent(nameOrSignatureOrTopic: "Commitment"): EventFragment;
 
-    encodeFunctionData(functionFragment: 'commit', values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: 'commit', values: [string, BigNumberish]): string;
 encodeFunctionData(functionFragment: 'commiter', values?: undefined): string;
-encodeFunctionData(functionFragment: 'reterieve', values: [BigNumberish]): string;
+encodeFunctionData(functionFragment: 'reterieve', values: [string]): string;
 encodeFunctionData(functionFragment: 'updateCommitter', values: [AddressLike]): string;
 
     decodeFunctionResult(functionFragment: 'commit', data: BytesLike): Result;
@@ -23,9 +23,9 @@ decodeFunctionResult(functionFragment: 'updateCommitter', data: BytesLike): Resu
 
   
     export namespace CommitmentEvent {
-      export type InputTuple = [id: BigNumberish, p_hash: BigNumberish];
-      export type OutputTuple = [id: bigint, p_hash: bigint];
-      export interface OutputObject {id: bigint, p_hash: bigint };
+      export type InputTuple = [id: string, p_hash: BigNumberish];
+      export type OutputTuple = [id: string, p_hash: bigint];
+      export interface OutputObject {id: string, p_hash: bigint };
       export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>
       export type Filter = TypedDeferredTopicFilter<Event>
       export type Log = TypedEventLog<Event>
@@ -69,7 +69,7 @@ decodeFunctionResult(functionFragment: 'updateCommitter', data: BytesLike): Resu
     
     
     commit: TypedContractMethod<
-      [id: BigNumberish, p_hash: BigNumberish, ],
+      [id: string, p_hash: BigNumberish, ],
       [void],
       'nonpayable'
     >
@@ -85,7 +85,7 @@ decodeFunctionResult(functionFragment: 'updateCommitter', data: BytesLike): Resu
 
     
     reterieve: TypedContractMethod<
-      [id: BigNumberish, ],
+      [id: string, ],
       [bigint],
       'view'
     >
@@ -103,7 +103,7 @@ decodeFunctionResult(functionFragment: 'updateCommitter', data: BytesLike): Resu
     getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
     getFunction(nameOrSignature: 'commit'): TypedContractMethod<
-      [id: BigNumberish, p_hash: BigNumberish, ],
+      [id: string, p_hash: BigNumberish, ],
       [void],
       'nonpayable'
     >;
@@ -113,7 +113,7 @@ getFunction(nameOrSignature: 'commiter'): TypedContractMethod<
       'view'
     >;
 getFunction(nameOrSignature: 'reterieve'): TypedContractMethod<
-      [id: BigNumberish, ],
+      [id: string, ],
       [bigint],
       'view'
     >;
@@ -127,7 +127,7 @@ getFunction(nameOrSignature: 'updateCommitter'): TypedContractMethod<
 
     filters: {
       
-      'Commitment(uint256,uint256)': TypedContractEvent<CommitmentEvent.InputTuple, CommitmentEvent.OutputTuple, CommitmentEvent.OutputObject>;
+      'Commitment(string,uint256)': TypedContractEvent<CommitmentEvent.InputTuple, CommitmentEvent.OutputTuple, CommitmentEvent.OutputObject>;
       Commitment: TypedContractEvent<CommitmentEvent.InputTuple, CommitmentEvent.OutputTuple, CommitmentEvent.OutputObject>;
     
     };

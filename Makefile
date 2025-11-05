@@ -22,6 +22,15 @@ commit:
 	fi && \
 	npx hardhat run scripts/generate_commitment.ts --network localhost
 
+# Run the server script
+server:
+	cd $(CONTRACT_DIR) && node ./dist/scripts/server2.js
+
+# Expose the local server using ngrok
+# Please Do Not Use This in Production, as it is insecure and intended for development only
+rock:
+	ngrok http 5000 --domain=noe-uninducible-cheerlessly.ngrok-free.dev
+
 # Clean up stored address
 clean:
 	cd $(CONTRACT_DIR) && rm -f zkbio-address.txt

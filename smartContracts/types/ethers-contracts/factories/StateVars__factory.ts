@@ -16,9 +16,9 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "uint256",
+        "internalType": "string",
         "name": "id",
-        "type": "uint256"
+        "type": "string"
       },
       {
         "indexed": true,
